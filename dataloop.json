@@ -4,6 +4,11 @@
   "description": "Pandaset Dataset, 0",
   "scope": "public",
   "version": "0.0.10",
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/pandaset-datasets.git",
+    "gitTag": "0.0.10"
+  },
   "attributes": {
     "Category": "Dataset",
     "Hub": "Dataloop",
