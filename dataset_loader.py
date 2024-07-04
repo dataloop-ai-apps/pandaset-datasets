@@ -237,31 +237,3 @@ class PandasetLoader(pandaset_parser.PandaSetParser):
         if os.path.exists(zip_path):
             os.remove(zip_path)
         self.upload_data(dataset=dataset, path=path, sequence_name='098', max_frames=5)
-
-
-if __name__ == '__main__':
-
-    try:
-        urllib.request.urlretrieve(
-            'https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/098.zip',
-            '098.zip')
-    except urllib.error.URLError as e:
-        print(f"Error downloading data: {e}")
-        exit()
-    # project = dl.projects.get(project_name="ShadiProject")
-    # # dataset = project.datasets.create(dataset_name="Pandaset Annotations")
-    # dataset = project.datasets.get('Pandaset New 2')
-    # parser = NewParser()
-    # path = r'C:\Users\Shadi\Desktop\DL-Apps\dtlpy-lidar\New folder'
-    # sequence_name = '098'
-    # parser.upload_data(dataset,
-    #                    path,
-    #                    sequence_name=sequence_name,
-    #                    max_frames=5)
-    # dataset.open_in_web()
-    # # pandaset_dataset = pandaset.DataSet(path)
-    # # sequence = pandaset_dataset[sequence_name]
-    # # sequence.load()
-    # #
-    # # item = dl.items.get(item_id='6686936a881a116e8417ef10')
-    # parser.upload_annotations(item=item, sequence=sequence, max_frames=5)
