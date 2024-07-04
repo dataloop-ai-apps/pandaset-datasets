@@ -1,0 +1,82 @@
+{
+  "displayName": "PandaSet098 Dataset",
+  "name": "pandaset-098-dataset",
+  "description": "Pandaset Dataset, 0",
+  "scope": "public",
+  "version": "0.0.10",
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/pandaset-datasets.git",
+    "gitTag": "0.0.10"
+  },
+  "attributes": {
+    "Category": "Dataset",
+    "Hub": "Dataloop",
+    "Provider": "Dataloop",
+    "Deployed By": "Dataloop",
+    "Media Type": "LiDAR",
+    "License": "CC BY 4.0",
+    "Annotation Type": "Semantic Segmentation"
+  },
+  "components": {
+    "computeConfigs": [
+      {
+        "name": "pandaset-deploy",
+        "secrets": [],
+        "runtime": {
+          "podType": "regular-m",
+          "concurrency": 1,
+          "runnerImage": "gcr.io/viewo-g/piper/agent/cpu/huggingface_datasets:0.0.1",
+          "autoscaler": {
+            "type": "rabbitmq",
+            "minReplicas": 0,
+            "maxReplicas": 2,
+            "queueLength": 1000
+          },
+          "preemptible": false
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "dataset-adapter",
+        "entryPoint": "dataset_loader.py",
+        "className": "PandasetLoader",
+        "description": "Dataset adapter for Hugging Face",
+        "initInputs": [],
+        "functions": [
+          {
+            "name": "upload_dataset",
+            "input": [
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": "Dataloop Dataset Entity"
+              },
+              {
+                "type": "String",
+                "name": "source",
+                "description": "Dataset source URL"
+              }
+            ],
+            "output": [],
+            "displayName": "upload_dataset",
+            "displayIcon": "",
+            "description": "function to upload dataset to Dataloop"
+          }
+        ]
+      }
+    ],
+    "datasets": [
+      {
+        "name": "pandaset-098",
+        "docs": "https://docs.basic.ai/docs/pandaset-dataset-tutorial#:~:text=Is%20Pandaset%20free%20to%20use,included%20in%20these%20Dataset%20Terms.",
+        "source": "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/098.zip",
+        "invoke": {
+          "namespace": "dataset-adapter.upload_dataset"
+        },
+        "computeConfig": "pandaset-deploy"
+      }
+    ]
+  }
+}
