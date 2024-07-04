@@ -20,6 +20,7 @@ class PandasetLoader(pandaset_parser.PandaSetParser):
         super().__init__()
         self.dataset_url = "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/098.zip"
         self.ids_mapping = dict()
+        self.ontology_filename = "ontology.json"
 
     @staticmethod
     def copy_calibration_files(source, dist):
@@ -216,7 +217,24 @@ class PandasetLoader(pandaset_parser.PandaSetParser):
         scene_item = dl.items.get(item_id=item_id)
         self.upload_annotations(item=scene_item, sequence=sequence, max_frames=max_frames)
 
+    def _import_recipe_ontology(self, dataset: dl.Dataset):
+        recipe = dataset.recipes.list()[0]
+        ontology = recipe.ontologies.list()[0]
+
+        new_ontology_filepath = os.path.join(os.path.dirname(str(__file__)), self.ontology_filename)
+        with open(file=new_ontology_filepath, mode='r') as file:
+            new_ontology_json = json.load(fp=file)
+
+        new_ontology = dl.Ontology.from_json(_json=new_ontology_json, client_api=dl.client_api, recipe=recipe)
+        new_ontology.id = ontology.id
+        new_ontology.creator = ontology.creator
+        new_ontology.metadata["system"]["projectIds"] = recipe.project_ids
+        new_ontology.update()
+        return recipe
+
     def upload_dataset(self, dataset: dl.Dataset, source: str):
+        self._import_recipe_ontology(dataset=dataset)
+
         path = os.path.join(os.getcwd(), 'data')
         os.makedirs(path, exist_ok=True)
         zip_path = os.path.join(path, '098.zip')
@@ -232,7 +250,6 @@ class PandasetLoader(pandaset_parser.PandaSetParser):
         zip_ref = zipfile.ZipFile(zip_path, 'r')
         zip_ref.extractall(os.path.dirname(zip_path))
         zip_ref.close()
-
         print(f"Extracted contents of '{zip_path}' to the same directory.")
         if os.path.exists(zip_path):
             os.remove(zip_path)
