@@ -123,6 +123,7 @@ class PandasetLoader(pandaset_parser.PandaSetParser):
                 v3d = o3d.utility.Vector3dVector(corners)
                 cloud = o3d.geometry.PointCloud(v3d)
                 cloud.transform(transformation_matrix)
+                # TODO: Use dtlpy lidar SDK
                 box_rotation = R.from_euler('xyz', [0, 0, float(yaw)]).as_matrix()
                 new_box_rotation = list(
                     R.from_matrix(np.dot(transformation_matrix[:3, :3], box_rotation)).as_euler('xyz'))
