@@ -1,7 +1,7 @@
 {
   "displayName": "PandaSet098 Dataset",
   "name": "pandaset-098-dataset",
-  "description": "Pandaset Dataset, 0",
+  "description": "Pandaset LiDAR Dataset, scene 098, includes 3D point cloud data, camera images, and semantic segmentation and 3D cube annotations",
   "scope": "public",
   "version": "0.0.11",
   "codebase": {
