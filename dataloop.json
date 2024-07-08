@@ -26,7 +26,7 @@
         "runtime": {
           "podType": "regular-m",
           "concurrency": 1,
-          "runnerImage": "gcr.io/viewo-g/piper/agent/cpu/huggingface_datasets:0.0.1",
+          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/pandaset-datasets:0.0.10",
           "autoscaler": {
             "type": "rabbitmq",
             "minReplicas": 0,
