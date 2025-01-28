@@ -1,26 +1,21 @@
 import os.path
 import pathlib
-import shutil
 import dtlpy as dl
-import numpy as np
-
-import glob
-from pandaset_devkit.python import pandaset
 import json
-from io import BytesIO
 import urllib.request
 import urllib.error
 import zipfile
 
 
-class PandasetLoader():
+class PandasetLoader(dl.BaseServiceRunner):
     def __init__(self):
         super().__init__()
         # self.dataset_url = "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/098.zip"
         self.dataset_url = "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/001.zip"
         self.ontology_filename = "ontology.json"
 
-    def upload_data(self, dataset: dl.Dataset, path, sequence_name="001"):
+    @staticmethod
+    def upload_data(dataset: dl.Dataset, path, sequence_name="001"):
         # Upload scene folder
         scene_path = os.path.join(path, sequence_name)
         dataset.items.upload(local_path=scene_path)
@@ -53,10 +48,27 @@ class PandasetLoader():
             else:
                 continue
 
-        dataset.items.upload(local_path=frames_item_json, remote_path=frames_item.filename, overwrite=True)
+        # Upload frames item
+        frames_item = dataset.items.upload(
+            remote_name=frames_item.name,
+            remote_path=frames_item.filename,
+            local_path=json.dumps(frames_item_json).encode(),
+            overwrite=True,
+            item_metadata={
+                "system": {
+                    "shebang": {
+                        "dltype": "PCDFrames"
+                    }
+                },
+                "fps": 1
+            }
+        )
 
         # Upload annotations
-
+        annotations_filepath = os.path.join(path, f'{sequence_name}_frames.json')
+        builder = dl.AnnotationCollection.from_json_file(filepath=annotations_filepath, item=frames_item)
+        builder.upload()
+        return frames_item
 
     def _import_recipe_ontology(self, dataset: dl.Dataset):
         recipe = dataset.recipes.list()[0]
