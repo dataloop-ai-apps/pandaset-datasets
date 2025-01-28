@@ -295,3 +295,5 @@ dataloop_scripts
 .env
 .DS_Store
 .devcontainer/
+
+data
