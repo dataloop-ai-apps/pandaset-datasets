@@ -20,11 +20,14 @@ class PandasetLoader(dl.BaseServiceRunner):
         scene_path = os.path.join(path, sequence_name)
         dataset.items.upload(local_path=scene_path)
         frames_item = dataset.items.get(filepath=f"/{sequence_name}/frames.json")
-        frames_item_json = frames_item.download(save_locally=False)
+        frames_item_json = json.load(fp=frames_item.download(save_locally=False))
 
         # Update frames item
-        dataset.download_annotations(local_path=scene_path, annotation_options=dl.ViewAnnotationOptions.JSON)
-        jsons_path = os.path.join(scene_path, 'json')
+        download_path = dataset.download_annotations(
+            local_path=scene_path,
+            annotation_options=dl.ViewAnnotationOptions.JSON
+        )
+        jsons_path = os.path.join(download_path, 'json')
         json_filepaths = pathlib.Path(jsons_path).rglob('*.json')
         for json_filepath in json_filepaths:
             json_filepath = str(json_filepath)
@@ -37,13 +40,11 @@ class PandasetLoader(dl.BaseServiceRunner):
                 frame_number = int(item.name.rstrip('.pcd'))
                 frames_item_json['frames'][frame_number]['lidar']['lidar_pcd_id'] = item.id
             # Camera item
-            elif 'camera' in json_filepath:
-                with open(json_filepath, 'r') as fp:
-                    camera_json = json.load(fp=fp)
+            elif 'image' in item.mimetype:
                 frame_number = int(item.name.rstrip('.jpg'))
                 frame_images = frames_item_json['frames'][frame_number]['images']
                 for idx, image in enumerate(frame_images):
-                    if camera_json['filename'] == image['remote_path']:
+                    if item.filename == image['remote_path']:
                         frames_item_json['frames'][frame_number]['images'][idx]['image_id'] = item.id
             else:
                 continue
@@ -51,7 +52,7 @@ class PandasetLoader(dl.BaseServiceRunner):
         # Upload frames item
         frames_item = dataset.items.upload(
             remote_name=frames_item.name,
-            remote_path=frames_item.filename,
+            remote_path=frames_item.dir,
             local_path=json.dumps(frames_item_json).encode(),
             overwrite=True,
             item_metadata={
@@ -66,7 +67,8 @@ class PandasetLoader(dl.BaseServiceRunner):
 
         # Upload annotations
         annotations_filepath = os.path.join(path, f'{sequence_name}_frames.json')
-        builder = dl.AnnotationCollection.from_json_file(filepath=annotations_filepath, item=frames_item)
+        builder = dl.AnnotationCollection.from_json_file(filepath=annotations_filepath)
+        builder.item = frames_item
         builder.upload()
         return frames_item
 
