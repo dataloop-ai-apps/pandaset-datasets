@@ -1,7 +1,7 @@
 {
-  "displayName": "PandaSet098 Dataset",
-  "name": "pandaset-098-dataset",
-  "description": "Pandaset LiDAR Dataset, scene 098, includes 3D point cloud data, camera images, and semantic segmentation and 3D cube annotations",
+  "displayName": "PandaSet001 Dataset",
+  "name": "pandaset-001-dataset",
+  "description": "PandaSet LiDAR Dataset, scene 001, includes 3D point cloud data, 2D camera images, and semantic segmentation and 3D cube annotations",
   "scope": "public",
   "version": "0.0.12",
   "codebase": {
@@ -16,7 +16,10 @@
     "Deployed By": "Dataloop",
     "Media Type": "LiDAR",
     "License": "CC BY 4.0",
-    "Annotation Type": "Semantic Segmentation"
+    "Annotation Type": [
+      "Cuboid",
+      "Semantic Segmentation"
+    ]
   },
   "components": {
     "computeConfigs": [
@@ -42,7 +45,7 @@
         "name": "dataset-adapter",
         "entryPoint": "dataset_loader.py",
         "className": "PandasetLoader",
-        "description": "Dataset adapter for Hugging Face",
+        "description": "Dataset adapter for PandaSet",
         "initInputs": [],
         "functions": [
           {
@@ -69,9 +72,9 @@
     ],
     "datasets": [
       {
-        "name": "pandaset-098",
+        "name": "pandaset-001",
         "docs": "https://docs.basic.ai/docs/pandaset-dataset-tutorial#:~:text=Is%20Pandaset%20free%20to%20use,included%20in%20these%20Dataset%20Terms.",
-        "source": "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/098.zip",
+        "source": "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/001.zip",
         "invoke": {
           "namespace": "dataset-adapter.upload_dataset"
         },
