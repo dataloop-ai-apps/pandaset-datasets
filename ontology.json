@@ -1,434 +1,536 @@
 {
-  "id": null,
-  "creator": null,
-  "title": "Pandaset New-ontology",
-  "roots": [
-    {
-      "value": {
-        "tag": "Bicycle",
-        "displayLabel": "Bicycle",
-        "color": "#ff0000",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Bus",
-        "displayLabel": "Bus",
-        "color": "#00ff4a",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Car",
-        "displayLabel": "Car",
-        "color": "#9500ff",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Cones",
-        "displayLabel": "Cones",
-        "color": "#ffdf00",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Medium-sized Truck",
-        "displayLabel": "Medium-sized Truck",
-        "color": "#00d4ff",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Pedestrian",
-        "displayLabel": "Pedestrian",
-        "color": "#ff008a",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Pickup Truck",
-        "displayLabel": "Pickup Truck",
-        "color": "#40ff00",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Signs",
-        "displayLabel": "Signs",
-        "color": "#0b00ff",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Smoke",
-        "displayLabel": "Smoke",
-        "color": "#4c4d94",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Exhaust",
-        "displayLabel": "Exhaust",
-        "color": "#14baed",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Spray or rain",
-        "displayLabel": "Spray or rain",
-        "color": "#54b163",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Reflection",
-        "displayLabel": "Reflection",
-        "color": "#2561c8",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Vegetation",
-        "displayLabel": "Vegetation",
-        "color": "#5999d2",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Ground",
-        "displayLabel": "Ground",
-        "color": "#7fa2c5",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Road",
-        "displayLabel": "Road",
-        "color": "#026f34",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Lane Line Marking",
-        "displayLabel": "Lane Line Marking",
-        "color": "#565935",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Stop Line Marking",
-        "displayLabel": "Stop Line Marking",
-        "color": "#5734a1",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Other Road Marking",
-        "displayLabel": "Other Road Marking",
-        "color": "#c3f8f0",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Sidewalk",
-        "displayLabel": "Sidewalk",
-        "color": "#10db4f",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Driveway",
-        "displayLabel": "Driveway",
-        "color": "#e031b1",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Semi-truck",
-        "displayLabel": "Semi-truck",
-        "color": "#f38031",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Towed Object",
-        "displayLabel": "Towed Object",
-        "color": "#dfb9a4",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Motorcycle",
-        "displayLabel": "Motorcycle",
-        "color": "#8dd33d",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Other Vehicle - Construction Vehicle",
-        "displayLabel": "Other Vehicle - Construction Vehicle",
-        "color": "#4f3f93",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Other Vehicle - Uncommon",
-        "displayLabel": "Other Vehicle - Uncommon",
-        "color": "#3665bd",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Other Vehicle - Pedicab",
-        "displayLabel": "Other Vehicle - Pedicab",
-        "color": "#c8e965",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Emergency Vehicle",
-        "displayLabel": "Emergency Vehicle",
-        "color": "#cbcca7",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Personal Mobility Device",
-        "displayLabel": "Personal Mobility Device",
-        "color": "#e7b0fc",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Motorized Scooter",
-        "displayLabel": "Motorized Scooter",
-        "color": "#28e070",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Train",
-        "displayLabel": "Train",
-        "color": "#4d51e8",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Trolley",
-        "displayLabel": "Trolley",
-        "color": "#2462d3",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Tram / Subway",
-        "displayLabel": "Tram / Subway",
-        "color": "#e9f481",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Pedestrian with Object",
-        "displayLabel": "Pedestrian with Object",
-        "color": "#c5aae2",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Animals - Bird",
-        "displayLabel": "Animals - Bird",
-        "color": "#1527cb",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Animals - Other",
-        "displayLabel": "Animals - Other",
-        "color": "#908dab",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Pylons",
-        "displayLabel": "Pylons",
-        "color": "#8f5f94",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Road Barriers",
-        "displayLabel": "Road Barriers",
-        "color": "#b82ecc",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Construction Signs",
-        "displayLabel": "Construction Signs",
-        "color": "#dfd42a",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Temporary Construction Barriers",
-        "displayLabel": "Temporary Construction Barriers",
-        "color": "#a9c679",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Rolling Containers",
-        "displayLabel": "Rolling Containers",
-        "color": "#574a9d",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Building",
-        "displayLabel": "Building",
-        "color": "#ae9476",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    },
-    {
-      "value": {
-        "tag": "Other Static Object",
-        "displayLabel": "Other Static Object",
-        "color": "#9ee7c0",
-        "attributes": [],
-        "displayData": {}
-      },
-      "children": []
-    }
-  ],
-  "metadata": {
-    "system": {
-      "projectIds": null,
-      "system": false
-    },
-    "attributes": []
-  }
+	"id": null,
+	"creator": null,
+	"title": "PandaSet-ontology",
+	"roots": [
+		{
+			"value": {
+				"tag": "Bicycle",
+				"displayLabel": "Bicycle",
+				"color": "#ff0000",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Bus",
+				"displayLabel": "Bus",
+				"color": "#00ff4a",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Car",
+				"displayLabel": "Car",
+				"color": "#9500ff",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Cones",
+				"displayLabel": "Cones",
+				"color": "#ffdf00",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Medium-sized Truck",
+				"displayLabel": "Medium-sized Truck",
+				"color": "#00d4ff",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Pedestrian",
+				"displayLabel": "Pedestrian",
+				"color": "#ff008a",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Pickup Truck",
+				"displayLabel": "Pickup Truck",
+				"color": "#40ff00",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Signs",
+				"displayLabel": "Signs",
+				"color": "#0b00ff",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Smoke",
+				"displayLabel": "Smoke",
+				"color": "#4c4d94",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Exhaust",
+				"displayLabel": "Exhaust",
+				"color": "#14baed",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Spray or rain",
+				"displayLabel": "Spray or rain",
+				"color": "#54b163",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Reflection",
+				"displayLabel": "Reflection",
+				"color": "#2561c8",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Vegetation",
+				"displayLabel": "Vegetation",
+				"color": "#5999d2",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Ground",
+				"displayLabel": "Ground",
+				"color": "#7fa2c5",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Road",
+				"displayLabel": "Road",
+				"color": "#026f34",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Lane Line Marking",
+				"displayLabel": "Lane Line Marking",
+				"color": "#565935",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Stop Line Marking",
+				"displayLabel": "Stop Line Marking",
+				"color": "#5734a1",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Other Road Marking",
+				"displayLabel": "Other Road Marking",
+				"color": "#c3f8f0",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Sidewalk",
+				"displayLabel": "Sidewalk",
+				"color": "#10db4f",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Driveway",
+				"displayLabel": "Driveway",
+				"color": "#e031b1",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Semi-truck",
+				"displayLabel": "Semi-truck",
+				"color": "#f38031",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Towed Object",
+				"displayLabel": "Towed Object",
+				"color": "#dfb9a4",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Motorcycle",
+				"displayLabel": "Motorcycle",
+				"color": "#8dd33d",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Other Vehicle - Construction Vehicle",
+				"displayLabel": "Other Vehicle - Construction Vehicle",
+				"color": "#4f3f93",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Other Vehicle - Uncommon",
+				"displayLabel": "Other Vehicle - Uncommon",
+				"color": "#3665bd",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Other Vehicle - Pedicab",
+				"displayLabel": "Other Vehicle - Pedicab",
+				"color": "#c8e965",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Emergency Vehicle",
+				"displayLabel": "Emergency Vehicle",
+				"color": "#cbcca7",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Personal Mobility Device",
+				"displayLabel": "Personal Mobility Device",
+				"color": "#e7b0fc",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Motorized Scooter",
+				"displayLabel": "Motorized Scooter",
+				"color": "#28e070",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Train",
+				"displayLabel": "Train",
+				"color": "#4d51e8",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Trolley",
+				"displayLabel": "Trolley",
+				"color": "#2462d3",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Tram / Subway",
+				"displayLabel": "Tram / Subway",
+				"color": "#e9f481",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Pedestrian with Object",
+				"displayLabel": "Pedestrian with Object",
+				"color": "#c5aae2",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Animals - Bird",
+				"displayLabel": "Animals - Bird",
+				"color": "#1527cb",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Animals - Other",
+				"displayLabel": "Animals - Other",
+				"color": "#908dab",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Pylons",
+				"displayLabel": "Pylons",
+				"color": "#8f5f94",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Road Barriers",
+				"displayLabel": "Road Barriers",
+				"color": "#b82ecc",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Construction Signs",
+				"displayLabel": "Construction Signs",
+				"color": "#dfd42a",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Temporary Construction Barriers",
+				"displayLabel": "Temporary Construction Barriers",
+				"color": "#a9c679",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Rolling Containers",
+				"displayLabel": "Rolling Containers",
+				"color": "#574a9d",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Building",
+				"displayLabel": "Building",
+				"color": "#ae9476",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		},
+		{
+			"value": {
+				"tag": "Other Static Object",
+				"displayLabel": "Other Static Object",
+				"color": "#9ee7c0",
+				"attributes": [],
+				"displayData": {}
+			},
+			"children": []
+		}
+	],
+	"metadata": {
+		"system": {
+			"projectIds": [
+				"df54f4f5-6d68-4fea-abe2-47216c069477"
+			],
+			"system": false
+		},
+		"attributes": [
+			{
+				"key": "stationary",
+				"type": "boolean",
+				"scope": [
+					"*"
+				],
+				"scriptData": {
+					"scope": "@ontology.sections.stationary.scope",
+					"title": "stationary",
+					"key": "stationary",
+					"optional": true,
+					"multi": true
+				}
+			},
+			{
+				"key": "object_motion",
+				"type": "freeText",
+				"scope": [
+					"*"
+				],
+				"scriptData": {
+					"scope": "@ontology.sections.object_motion.scope",
+					"title": "object_motion",
+					"key": "object_motion",
+					"optional": true,
+					"multi": true
+				}
+			},
+			{
+				"key": "sibling_id",
+				"type": "freeText",
+				"scope": [
+					"*"
+				],
+				"scriptData": {
+					"scope": "@ontology.sections.sibling_id.scope",
+					"title": "sibling_id",
+					"key": "sibling_id",
+					"optional": true,
+					"multi": true
+				}
+			},
+			{
+				"key": "sensor_id",
+				"type": "freeText",
+				"scope": [
+					"*"
+				],
+				"scriptData": {
+					"scope": "@ontology.sections.sensor_id.scope",
+					"title": "sensor_id",
+					"key": "sensor_id",
+					"optional": true,
+					"multi": true
+				}
+			},
+			{
+				"key": "pedestrian_behavior",
+				"type": "freeText",
+				"scope": [
+					"*"
+				],
+				"scriptData": {
+					"scope": "@ontology.sections.pedestrian_behavior.scope",
+					"title": "pedestrian_behavior",
+					"key": "pedestrian_behavior",
+					"optional": true,
+					"multi": true
+				}
+			},
+			{
+				"key": "pedestrian_age",
+				"type": "freeText",
+				"scope": [
+					"*"
+				],
+				"scriptData": {
+					"scope": "@ontology.sections.pedestrian_age.scope",
+					"title": "pedestrian_age",
+					"key": "pedestrian_age",
+					"optional": true,
+					"multi": true
+				}
+			},
+			{
+				"key": "rider_status",
+				"type": "freeText",
+				"scope": [
+					"*"
+				],
+				"scriptData": {
+					"scope": "@ontology.sections.rider_status.scope",
+					"title": "rider_status",
+					"key": "rider_status",
+					"optional": true,
+					"multi": true
+				}
+			}
+		]
+	},
+	"attributes": []
 }
