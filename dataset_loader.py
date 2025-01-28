@@ -24,7 +24,7 @@ class PandasetLoader(dl.BaseServiceRunner):
 
         # Update frames item
         download_path = dataset.download_annotations(
-            local_path=scene_path,
+            local_path=path,
             annotation_options=dl.ViewAnnotationOptions.JSON
         )
         jsons_path = os.path.join(download_path, 'json')
