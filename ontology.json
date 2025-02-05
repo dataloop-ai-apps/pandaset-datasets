@@ -1,6 +1,6 @@
 {
 	"id": null,
-	"creator": null,
+	"creator": "ofir.g@dataloop.ai",
 	"title": "PandaSet-ontology",
 	"roots": [
 		{
@@ -426,9 +426,7 @@
 	],
 	"metadata": {
 		"system": {
-			"projectIds": [
-				"df54f4f5-6d68-4fea-abe2-47216c069477"
-			],
+			"projectIds": [],
 			"system": false
 		},
 		"attributes": [
@@ -532,5 +530,104 @@
 			}
 		]
 	},
-	"attributes": []
+	"attributes": [
+		{
+			"key": "stationary",
+			"type": "boolean",
+			"scope": [
+				"*"
+			],
+			"scriptData": {
+				"scope": "@ontology.sections.stationary.scope",
+				"title": "stationary",
+				"key": "stationary",
+				"optional": true,
+				"multi": true
+			}
+		},
+		{
+			"key": "object_motion",
+			"type": "freeText",
+			"scope": [
+				"*"
+			],
+			"scriptData": {
+				"scope": "@ontology.sections.object_motion.scope",
+				"title": "object_motion",
+				"key": "object_motion",
+				"optional": true,
+				"multi": true
+			}
+		},
+		{
+			"key": "sibling_id",
+			"type": "freeText",
+			"scope": [
+				"*"
+			],
+			"scriptData": {
+				"scope": "@ontology.sections.sibling_id.scope",
+				"title": "sibling_id",
+				"key": "sibling_id",
+				"optional": true,
+				"multi": true
+			}
+		},
+		{
+			"key": "sensor_id",
+			"type": "freeText",
+			"scope": [
+				"*"
+			],
+			"scriptData": {
+				"scope": "@ontology.sections.sensor_id.scope",
+				"title": "sensor_id",
+				"key": "sensor_id",
+				"optional": true,
+				"multi": true
+			}
+		},
+		{
+			"key": "pedestrian_behavior",
+			"type": "freeText",
+			"scope": [
+				"*"
+			],
+			"scriptData": {
+				"scope": "@ontology.sections.pedestrian_behavior.scope",
+				"title": "pedestrian_behavior",
+				"key": "pedestrian_behavior",
+				"optional": true,
+				"multi": true
+			}
+		},
+		{
+			"key": "pedestrian_age",
+			"type": "freeText",
+			"scope": [
+				"*"
+			],
+			"scriptData": {
+				"scope": "@ontology.sections.pedestrian_age.scope",
+				"title": "pedestrian_age",
+				"key": "pedestrian_age",
+				"optional": true,
+				"multi": true
+			}
+		},
+		{
+			"key": "rider_status",
+			"type": "freeText",
+			"scope": [
+				"*"
+			],
+			"scriptData": {
+				"scope": "@ontology.sections.rider_status.scope",
+				"title": "rider_status",
+				"key": "rider_status",
+				"optional": true,
+				"multi": true
+			}
+		}
+	]
 }

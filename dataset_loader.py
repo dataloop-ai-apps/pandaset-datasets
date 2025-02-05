@@ -14,15 +14,23 @@ class PandasetLoader(dl.BaseServiceRunner):
         self.dataset_url = "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/001.zip"
         self.ontology_filename = "ontology.json"
 
-    @staticmethod
-    def upload_data(dataset: dl.Dataset, path, sequence_name="001"):
-        # Get and Upload Segmentation References
-        sem_ref_path = os.path.join(path, 'sem_ref')
-        sem_ref_filepaths = pathlib.Path(sem_ref_path).rglob('*.json')
-        sem_ref_filepaths_map = {filepath.stem.split('_', 1)[1]: filepath for filepath in sem_ref_filepaths}
-        sem_ref_items = dataset.items.upload(local_path=sem_ref_path, remote_path="/.dataloop")
-        sem_ref_items_map = {pathlib.Path(item.filename).stem.split('_', 1)[1]: item for item in sem_ref_items}
+    def _import_recipe_ontology(self, dataset: dl.Dataset):
+        recipe = dataset.recipes.list()[0]
+        ontology = recipe.ontologies.list()[0]
 
+        new_ontology_filepath = os.path.join(os.path.dirname(str(__file__)), self.ontology_filename)
+        with open(file=new_ontology_filepath, mode='r') as file:
+            new_ontology_json = json.load(fp=file)
+
+        new_ontology = dl.Ontology.from_json(_json=new_ontology_json, client_api=dl.client_api, recipe=recipe)
+        new_ontology.id = ontology.id
+        new_ontology.creator = ontology.creator
+        new_ontology.metadata["system"]["projectIds"] = recipe.project_ids
+        new_ontology.update()
+        return recipe
+
+    @staticmethod
+    def _upload_data(dataset: dl.Dataset, path, sequence_name="001"):
         # Upload scene folder
         scene_path = os.path.join(path, sequence_name)
         dataset.items.upload(local_path=scene_path)
@@ -71,6 +79,17 @@ class PandasetLoader(dl.BaseServiceRunner):
                 "fps": 1
             }
         )
+        return frames_item
+
+    @staticmethod
+    def _upload_annotations(frames_item: dl.Item, path, sequence_name="001"):
+        # Get and Upload Segmentation References
+        dataset = frames_item.dataset
+        sem_ref_path = os.path.join(path, 'sem_ref')
+        # sem_ref_filepaths = pathlib.Path(sem_ref_path).rglob('*.json')
+        # sem_ref_filepaths_map = {filepath.stem.split('_', 1)[1]: filepath for filepath in sem_ref_filepaths}
+        sem_ref_items = dataset.items.upload(local_path=sem_ref_path, remote_path="/.dataloop")
+        sem_ref_items_map = {pathlib.Path(item.filename).stem.split('_', 1)[1]: item for item in sem_ref_items}
 
         # Load annotations and modify them
         annotations_filepath = os.path.join(path, f'{sequence_name}_frames.json')
@@ -78,27 +97,12 @@ class PandasetLoader(dl.BaseServiceRunner):
         annotation: dl.Annotation
         for annotation in builder.annotations:
             if annotation.type == "ref_semantic_3d":
-                pass  # TODO: in progress
+                ref_item = sem_ref_items_map[annotation.label]
+                annotation.coordinates["ref"] = ref_item.id
 
         # Upload annotations
         builder.item = frames_item
         builder.upload()
-        return frames_item
-
-    def _import_recipe_ontology(self, dataset: dl.Dataset):
-        recipe = dataset.recipes.list()[0]
-        ontology = recipe.ontologies.list()[0]
-
-        new_ontology_filepath = os.path.join(os.path.dirname(str(__file__)), self.ontology_filename)
-        with open(file=new_ontology_filepath, mode='r') as file:
-            new_ontology_json = json.load(fp=file)
-
-        new_ontology = dl.Ontology.from_json(_json=new_ontology_json, client_api=dl.client_api, recipe=recipe)
-        new_ontology.id = ontology.id
-        new_ontology.creator = ontology.creator
-        new_ontology.metadata["system"]["projectIds"] = recipe.project_ids
-        new_ontology.update()
-        return recipe
 
     def upload_dataset(self, dataset: dl.Dataset, source: str):
         self._import_recipe_ontology(dataset=dataset)
@@ -121,4 +125,8 @@ class PandasetLoader(dl.BaseServiceRunner):
         print(f"Extracted contents of '{zip_path}' to the same directory.")
         if os.path.exists(zip_path):
             os.remove(zip_path)
-        self.upload_data(dataset=dataset, path=path)
+
+        # Upload data and annotations
+        frames_item = self._upload_data(dataset=dataset, path=path)
+        self._upload_annotations(frames_item=frames_item, path=path)
+        return frames_item
