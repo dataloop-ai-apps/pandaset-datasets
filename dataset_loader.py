@@ -105,8 +105,6 @@ class PandasetLoader(dl.BaseServiceRunner):
         builder.upload()
 
     def upload_dataset(self, dataset: dl.Dataset, source: str):
-        self._import_recipe_ontology(dataset=dataset)
-
         path = os.path.join(os.getcwd(), 'data')
         os.makedirs(path, exist_ok=True)
         zip_path = os.path.join(path, '001.zip')
@@ -126,7 +124,8 @@ class PandasetLoader(dl.BaseServiceRunner):
         if os.path.exists(zip_path):
             os.remove(zip_path)
 
-        # Upload data and annotations
+        # Upload recipe, data and annotations
+        self._import_recipe_ontology(dataset=dataset)
         frames_item = self._upload_data(dataset=dataset, path=path)
         self._upload_annotations(frames_item=frames_item, path=path)
         return frames_item
