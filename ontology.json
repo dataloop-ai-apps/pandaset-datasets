@@ -426,16 +426,18 @@
 	],
 	"metadata": {
 		"system": {
-			"projectIds": [],
+			"projectIds": [
+				"9ca23585-c537-4bee-942c-ee4142735980"
+			],
 			"system": false
 		},
 		"attributes": [
 			{
-				"key": "stationary",
-				"type": "boolean",
 				"scope": [
 					"*"
 				],
+				"key": "stationary",
+				"type": "boolean",
 				"scriptData": {
 					"scope": "@ontology.sections.stationary.scope",
 					"title": "stationary",
@@ -445,11 +447,11 @@
 				}
 			},
 			{
-				"key": "object_motion",
-				"type": "freeText",
 				"scope": [
 					"*"
 				],
+				"key": "object_motion",
+				"type": "freeText",
 				"scriptData": {
 					"scope": "@ontology.sections.object_motion.scope",
 					"title": "object_motion",
@@ -459,11 +461,11 @@
 				}
 			},
 			{
-				"key": "sibling_id",
-				"type": "freeText",
 				"scope": [
 					"*"
 				],
+				"key": "sibling_id",
+				"type": "freeText",
 				"scriptData": {
 					"scope": "@ontology.sections.sibling_id.scope",
 					"title": "sibling_id",
@@ -473,11 +475,11 @@
 				}
 			},
 			{
-				"key": "sensor_id",
-				"type": "freeText",
 				"scope": [
 					"*"
 				],
+				"key": "sensor_id",
+				"type": "freeText",
 				"scriptData": {
 					"scope": "@ontology.sections.sensor_id.scope",
 					"title": "sensor_id",
@@ -487,11 +489,11 @@
 				}
 			},
 			{
-				"key": "pedestrian_behavior",
-				"type": "freeText",
 				"scope": [
 					"*"
 				],
+				"key": "pedestrian_behavior",
+				"type": "freeText",
 				"scriptData": {
 					"scope": "@ontology.sections.pedestrian_behavior.scope",
 					"title": "pedestrian_behavior",
@@ -501,11 +503,11 @@
 				}
 			},
 			{
-				"key": "pedestrian_age",
-				"type": "freeText",
 				"scope": [
 					"*"
 				],
+				"key": "pedestrian_age",
+				"type": "freeText",
 				"scriptData": {
 					"scope": "@ontology.sections.pedestrian_age.scope",
 					"title": "pedestrian_age",
@@ -515,11 +517,11 @@
 				}
 			},
 			{
-				"key": "rider_status",
-				"type": "freeText",
 				"scope": [
 					"*"
 				],
+				"key": "rider_status",
+				"type": "freeText",
 				"scriptData": {
 					"scope": "@ontology.sections.rider_status.scope",
 					"title": "rider_status",
@@ -530,5 +532,55 @@
 			}
 		]
 	},
-	"attributes": []
+	"attributes": [
+		{
+			"scope": [
+				"*"
+			],
+			"key": "stationary",
+			"type": "boolean"
+		},
+		{
+			"scope": [
+				"*"
+			],
+			"key": "object_motion",
+			"type": "freeText"
+		},
+		{
+			"scope": [
+				"*"
+			],
+			"key": "sibling_id",
+			"type": "freeText"
+		},
+		{
+			"scope": [
+				"*"
+			],
+			"key": "sensor_id",
+			"type": "freeText"
+		},
+		{
+			"scope": [
+				"*"
+			],
+			"key": "pedestrian_behavior",
+			"type": "freeText"
+		},
+		{
+			"scope": [
+				"*"
+			],
+			"key": "pedestrian_age",
+			"type": "freeText"
+		},
+		{
+			"scope": [
+				"*"
+			],
+			"key": "rider_status",
+			"type": "freeText"
+		}
+	]
 }
