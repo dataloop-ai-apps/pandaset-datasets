@@ -1,4 +1,4 @@
-import os.path
+import os
 import pathlib
 import dtlpy as dl
 import json
@@ -16,6 +16,13 @@ class PandasetLoader(dl.BaseServiceRunner):
 
     @staticmethod
     def upload_data(dataset: dl.Dataset, path, sequence_name="001"):
+        # Get and Upload Segmentation References
+        sem_ref_path = os.path.join(path, 'sem_ref')
+        sem_ref_filepaths = pathlib.Path(sem_ref_path).rglob('*.json')
+        sem_ref_filepaths_map = {filepath.stem.split('_', 1)[1]: filepath for filepath in sem_ref_filepaths}
+        sem_ref_items = dataset.items.upload(local_path=sem_ref_path, remote_path="/.dataloop")
+        sem_ref_items_map = {pathlib.Path(item.filename).stem.split('_', 1)[1]: item for item in sem_ref_items}
+
         # Upload scene folder
         scene_path = os.path.join(path, sequence_name)
         dataset.items.upload(local_path=scene_path)
@@ -65,9 +72,15 @@ class PandasetLoader(dl.BaseServiceRunner):
             }
         )
 
-        # Upload annotations
+        # Load annotations and modify them
         annotations_filepath = os.path.join(path, f'{sequence_name}_frames.json')
         builder = dl.AnnotationCollection.from_json_file(filepath=annotations_filepath)
+        annotation: dl.Annotation
+        for annotation in builder.annotations:
+            if annotation.type == "ref_semantic_3d":
+                pass  # TODO: in progress
+
+        # Upload annotations
         builder.item = frames_item
         builder.upload()
         return frames_item
