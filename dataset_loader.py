@@ -5,6 +5,9 @@ import json
 import urllib.request
 import urllib.error
 import zipfile
+import logging
+
+logger = logging.getLogger(name='pandaset-dataset')
 
 
 class PandasetLoader(dl.BaseServiceRunner):
@@ -15,22 +18,57 @@ class PandasetLoader(dl.BaseServiceRunner):
         self.ontology_filename = "ontology.json"
 
     def _import_recipe_ontology(self, dataset: dl.Dataset):
-        recipe = dataset.recipes.list()[0]
-        ontology = recipe.ontologies.list()[0]
+        recipe: dl.Recipe = dataset.recipes.list()[0]
+        ontology: dl.Ontology = recipe.ontologies.list()[0]
 
         new_ontology_filepath = os.path.join(os.path.dirname(str(__file__)), self.ontology_filename)
         with open(file=new_ontology_filepath, mode='r') as file:
             new_ontology_json = json.load(fp=file)
 
-        new_ontology = dl.Ontology.from_json(_json=new_ontology_json, client_api=dl.client_api, recipe=recipe)
-        new_ontology.id = ontology.id
-        new_ontology.creator = ontology.creator
-        new_ontology.metadata["system"]["projectIds"] = recipe.project_ids
-        new_ontology.update()
-        return recipe
+        new_ontology = ontology.copy_from(ontology_json=new_ontology_json)
+        return new_ontology
 
     @staticmethod
-    def _upload_data(dataset: dl.Dataset, path, sequence_name="001"):
+    def download_zip(source, progress=None):
+        if progress is not None:
+            progress.update(progress=10, message="Downloading dataset for source...")
+
+        path = os.path.join(os.getcwd(), 'data')
+        os.makedirs(path, exist_ok=True)
+        zip_path = os.path.join(path, '001.zip')
+        try:
+            urllib.request.urlretrieve(source, zip_path)
+        except urllib.error.URLError as e:
+            raise urllib.error.URLError(f"Error downloading data: {e}")
+
+        if not os.path.isfile(zip_path) or not zip_path.endswith(".zip"):
+            raise FileNotFoundError(f"Error: '{zip_path}' is not a valid zip file.")
+
+        # Extract zip contents to a directory with the same name (excluding .zip)
+        zip_ref = zipfile.ZipFile(zip_path, 'r')
+        zip_ref.extractall(os.path.dirname(zip_path))
+        zip_ref.close()
+        logger.info(f"Extracted contents of '{zip_path}' to the same directory.")
+        if os.path.exists(zip_path):
+            os.remove(zip_path)
+        return path
+
+    @staticmethod
+    def _upload_data(dataset: dl.Dataset, path, sequence_name="001", progress=None):
+        if progress is not None:
+            progress.update(progress=40, message="Uploading source data...")
+
+        # Add progress update callback
+        progress_tracker = {'last_progress': 0}
+        def progress_callback(**kwargs):
+            p = kwargs.get('progress')  # p is between 0-100
+            if progress is not None:
+                progress_int = round(p / 10) * 10  # round to 10th
+                if progress_int % 10 == 0 and progress_int != progress_tracker['last_progress']:
+                    progress.update(progress=40 + (40 * progress_int / 100), message="Uploading source data...")
+                    progress_tracker['last_progress'] = progress_int
+        dl.client_api.callbacks.add(event='itemUpload', func=progress_callback)
+
         # Upload scene folder
         scene_path = os.path.join(path, sequence_name)
         dataset.items.upload(local_path=scene_path)
@@ -83,7 +121,10 @@ class PandasetLoader(dl.BaseServiceRunner):
         return frames_item
 
     @staticmethod
-    def _upload_annotations(frames_item: dl.Item, path, sequence_name="001", include_semantic=False):
+    def _upload_annotations(frames_item: dl.Item, path, sequence_name="001", include_semantic=False, progress=None):
+        if progress is not None:
+            progress.update(progress=90, message="Uploading annotations...")
+
         # Load annotations and modify them
         annotations_filepath = os.path.join(path, f'{sequence_name}_frames.json')
         builder = dl.AnnotationCollection.from_json_file(filepath=annotations_filepath)
@@ -113,28 +154,9 @@ class PandasetLoader(dl.BaseServiceRunner):
         builder.item = frames_item
         builder.upload()
 
-    def upload_dataset(self, dataset: dl.Dataset, source: str):
-        path = os.path.join(os.getcwd(), 'data')
-        os.makedirs(path, exist_ok=True)
-        zip_path = os.path.join(path, '001.zip')
-        try:
-            urllib.request.urlretrieve(source, zip_path)
-        except urllib.error.URLError as e:
-            raise urllib.error.URLError(f"Error downloading data: {e}")
-
-        if not os.path.isfile(zip_path) or not zip_path.endswith(".zip"):
-            raise FileNotFoundError(f"Error: '{zip_path}' is not a valid zip file.")
-
-        # Extract zip contents to a directory with the same name (excluding .zip)
-        zip_ref = zipfile.ZipFile(zip_path, 'r')
-        zip_ref.extractall(os.path.dirname(zip_path))
-        zip_ref.close()
-        print(f"Extracted contents of '{zip_path}' to the same directory.")
-        if os.path.exists(zip_path):
-            os.remove(zip_path)
-
-        # Upload recipe, data and annotations
+    def upload_dataset(self, dataset: dl.Dataset, source: str, progress: dl.Progress = None):
         self._import_recipe_ontology(dataset=dataset)
-        frames_item = self._upload_data(dataset=dataset, path=path)
-        self._upload_annotations(frames_item=frames_item, path=path)
+        path = self.download_zip(source=source, progress=progress)
+        frames_item = self._upload_data(dataset=dataset, path=path, progress=progress)
+        self._upload_annotations(frames_item=frames_item, path=path, progress=progress)
         return frames_item
