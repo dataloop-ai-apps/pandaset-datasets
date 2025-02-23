@@ -13,8 +13,6 @@ logger = logging.getLogger(name='pandaset-dataset')
 class PandasetLoader(dl.BaseServiceRunner):
     def __init__(self):
         super().__init__()
-        # self.dataset_url = "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/098.zip"
-        self.dataset_url = "https://storage.googleapis.com/model-mgmt-snapshots/datasets-lidar-pandaset/001.zip"
         self.ontology_filename = "ontology.json"
 
     def _import_recipe_ontology(self, dataset: dl.Dataset):
@@ -121,7 +119,7 @@ class PandasetLoader(dl.BaseServiceRunner):
         return frames_item
 
     @staticmethod
-    def _upload_annotations(frames_item: dl.Item, path, sequence_name="001", include_semantic=False, progress=None):
+    def _upload_annotations(frames_item: dl.Item, path, sequence_name="001", progress=None):
         if progress is not None:
             progress.update(progress=90, message="Uploading annotations...")
 
@@ -130,25 +128,24 @@ class PandasetLoader(dl.BaseServiceRunner):
         builder = dl.AnnotationCollection.from_json_file(filepath=annotations_filepath)
 
         # TODO: Segmentation TBD
-        if include_semantic is True:
-            # Get and Upload Segmentation References
-            dataset = dl.datasets.get(dataset_id=frames_item.dataset.id)
-            sem_ref_path = os.path.join(path, 'sem_ref')
-            sem_ref_items = dataset.items.upload(local_path=sem_ref_path, remote_path="/.dataloop")
-            sem_ref_items_map = {pathlib.Path(item.filename).stem.split('_', 1)[1]: item for item in sem_ref_items}
+        # # Get and Upload Segmentation References
+        # dataset = dl.datasets.get(dataset_id=frames_item.dataset.id)
+        # sem_ref_path = os.path.join(path, 'sem_ref')
+        # sem_ref_items = dataset.items.upload(local_path=sem_ref_path, remote_path="/.dataloop")
+        # sem_ref_items_map = {pathlib.Path(item.filename).stem.split('_', 1)[1]: item for item in sem_ref_items}
+        #
+        # annotation: dl.Annotation
+        # for annotation in builder.annotations:
+        #     if annotation.type == "ref_semantic_3d":
+        #         ref_item = sem_ref_items_map[annotation.label]
+        #         annotation.coordinates["ref"] = ref_item.id
 
-            annotation: dl.Annotation
-            for annotation in builder.annotations:
-                if annotation.type == "ref_semantic_3d":
-                    ref_item = sem_ref_items_map[annotation.label]
-                    annotation.coordinates["ref"] = ref_item.id
-        else:
-            # Remove all semantic annotations
-            cubes_annotations = list()
-            for annotation in builder.annotations:
-                if annotation.type == dl.AnnotationType.CUBE3D:
-                    cubes_annotations.append(annotation)
-            builder.annotations = cubes_annotations
+        # Remove all segmentation annotations (After segmentation supported - remove this)
+        cubes_annotations = list()
+        for annotation in builder.annotations:
+            if annotation.type == dl.AnnotationType.CUBE3D:
+                cubes_annotations.append(annotation)
+        builder.annotations = cubes_annotations
 
         # Upload annotations
         builder.item = frames_item
