@@ -9,7 +9,7 @@ sensors with Scale AI’s high-quality data annotation.
 
 1. Navigate to **Startline**.
 2. Select **Datasets**.
-3. Choose the `PandaSet098 Dataset` from the list of available datasets.
+3. Choose the `PandaSet001 Dataset` from the list of available datasets.
 4. Click on **Install**.
 
 After a while, a new dataset will be created and visible under your **Data** section.
