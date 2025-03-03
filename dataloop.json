@@ -3,11 +3,11 @@
   "name": "pandaset-001-dataset",
   "description": "PandaSet LiDAR Dataset, scene 001, includes 3D point cloud data, 2D camera images, and semantic segmentation and 3D cube annotations",
   "scope": "public",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/pandaset-datasets.git",
-    "gitTag": "0.0.12"
+    "gitTag": "0.0.13"
   },
   "attributes": {
     "Category": "Dataset",
