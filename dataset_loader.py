@@ -6,9 +6,10 @@ import urllib.request
 import urllib.error
 import zipfile
 import logging
+import shutil
 
 logger = logging.getLogger(name='pandaset-dataset')
-
+ROOT_PATH = str(pathlib.Path(__file__).parent.absolute())
 
 class PandasetLoader(dl.BaseServiceRunner):
     def __init__(self):
@@ -19,7 +20,7 @@ class PandasetLoader(dl.BaseServiceRunner):
         recipe: dl.Recipe = dataset.recipes.list()[0]
         ontology: dl.Ontology = recipe.ontologies.list()[0]
 
-        new_ontology_filepath = os.path.join(os.path.dirname(str(__file__)), self.ontology_filename)
+        new_ontology_filepath = os.path.join(ROOT_PATH, self.ontology_filename)
         with open(file=new_ontology_filepath, mode='r') as file:
             new_ontology_json = json.load(fp=file)
 
@@ -31,7 +32,8 @@ class PandasetLoader(dl.BaseServiceRunner):
         if progress is not None:
             progress.update(progress=10, message="Downloading dataset for source...")
 
-        path = os.path.join(os.getcwd(), 'data')
+        path = os.path.join(ROOT_PATH, 'data')
+        shutil.rmtree(path, ignore_errors=True)
         os.makedirs(path, exist_ok=True)
         zip_path = os.path.join(path, '001.zip')
         try:
@@ -47,8 +49,6 @@ class PandasetLoader(dl.BaseServiceRunner):
         zip_ref.extractall(os.path.dirname(zip_path))
         zip_ref.close()
         logger.info(f"Extracted contents of '{zip_path}' to the same directory.")
-        if os.path.exists(zip_path):
-            os.remove(zip_path)
         return path
 
     @staticmethod
@@ -101,12 +101,12 @@ class PandasetLoader(dl.BaseServiceRunner):
             else:
                 continue
 
-        # Upload frames item
+        # Upload new frames item
+        frames_item.delete()
         frames_item = dataset.items.upload(
             remote_name=frames_item.name,
             remote_path=frames_item.dir,
             local_path=json.dumps(frames_item_json).encode(),
-            overwrite=True,
             item_metadata={
                 "system": {
                     "shebang": {
@@ -116,6 +116,8 @@ class PandasetLoader(dl.BaseServiceRunner):
                 "fps": 1
             }
         )
+        if not isinstance(frames_item, dl.Item):
+            raise ValueError(f"Frames item is expected to be an instance of dl.Item, but got: {frames_item}")
         return frames_item
 
     @staticmethod
@@ -156,4 +158,5 @@ class PandasetLoader(dl.BaseServiceRunner):
         path = self.download_zip(source=source, progress=progress)
         frames_item = self._upload_data(dataset=dataset, path=path, progress=progress)
         self._upload_annotations(frames_item=frames_item, path=path, progress=progress)
+        shutil.rmtree(path, ignore_errors=True)
         return frames_item

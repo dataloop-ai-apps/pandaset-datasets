@@ -29,7 +29,7 @@
         "runtime": {
           "podType": "regular-m",
           "concurrency": 1,
-          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/pandaset-datasets:0.0.10",
+          "runnerImage": "hub.dataloop.ai/dtlpy-runner-images/cpu:python3.10_opencv",
           "autoscaler": {
             "type": "rabbitmq",
             "minReplicas": 0,
