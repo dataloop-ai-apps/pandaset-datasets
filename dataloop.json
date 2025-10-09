@@ -1,14 +1,9 @@
 {
-  "displayName": "PandaSet001 Dataset",
-  "name": "pandaset-001-dataset",
+  "displayName": "PandaSet001 Dataset X",
+  "name": "pandaset-001-dataset-x",
   "description": "PandaSet LiDAR Dataset, scene 001, includes 3D point cloud data, 2D camera images, and semantic segmentation and 3D cube annotations",
   "scope": "public",
-  "version": "0.0.13",
-  "codebase": {
-    "type": "git",
-    "gitUrl": "https://github.com/dataloop-ai-apps/pandaset-datasets.git",
-    "gitTag": "0.0.13"
-  },
+  "version": "0.0.14",
   "attributes": {
     "Category": "Dataset",
     "Hub": "Dataloop",
@@ -29,7 +24,7 @@
         "runtime": {
           "podType": "regular-m",
           "concurrency": 1,
-          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/pandaset-datasets:0.0.11",
+          "runnerImage": "hub.dataloop.ai/dtlpy-runner-images/cpu:python3.10_opencv",
           "autoscaler": {
             "type": "rabbitmq",
             "minReplicas": 0,
