@@ -107,7 +107,6 @@ class PandasetLoader(dl.BaseServiceRunner):
             remote_name=frames_item.name,
             remote_path=frames_item.dir,
             local_path=json.dumps(frames_item_json).encode(),
-            overwrite=True,
             item_metadata={
                 "system": {
                     "shebang": {
