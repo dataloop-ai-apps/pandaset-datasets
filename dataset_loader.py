@@ -8,7 +8,7 @@ import zipfile
 import logging
 
 logger = logging.getLogger(name='pandaset-dataset')
-
+ROOT_PATH = str(pathlib.Path(__file__).parent.absolute())
 
 class PandasetLoader(dl.BaseServiceRunner):
     def __init__(self):
@@ -19,7 +19,7 @@ class PandasetLoader(dl.BaseServiceRunner):
         recipe: dl.Recipe = dataset.recipes.list()[0]
         ontology: dl.Ontology = recipe.ontologies.list()[0]
 
-        new_ontology_filepath = os.path.join(os.path.dirname(str(__file__)), self.ontology_filename)
+        new_ontology_filepath = os.path.join(ROOT_PATH, self.ontology_filename)
         with open(file=new_ontology_filepath, mode='r') as file:
             new_ontology_json = json.load(fp=file)
 
@@ -31,7 +31,7 @@ class PandasetLoader(dl.BaseServiceRunner):
         if progress is not None:
             progress.update(progress=10, message="Downloading dataset for source...")
 
-        path = os.path.join(os.getcwd(), 'data')
+        path = os.path.join(ROOT_PATH, 'data')
         os.makedirs(path, exist_ok=True)
         zip_path = os.path.join(path, '001.zip')
         try:
